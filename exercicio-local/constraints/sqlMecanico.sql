@@ -1,4 +1,4 @@
-CREATE DATABASE Constraints
+CREATE DATABASE Mecanica
 GO
 USE Constraints
 
@@ -17,14 +17,14 @@ GO
 
 CREATE TABLE Telefone_Cliente (
 	clienteId		INT				NOT NULL,
-	telefone		VARCHAR(11)		NOT NULL	CHECK(telefone = 10 OR telefone = 11)
+	telefone		VARCHAR(11)		NOT NULL	CHECK(LEN(telefone) = 10 OR LEN(telefone) = 11)
 	
-	PRIMARY KEY(clienteId, telefone),
+	PRIMARY KEY(clienteId, telefone)
 
 	FOREIGN KEY(clienteId)
 	REFERENCES Cliente(id)
 	ON DELETE CASCADE
-	ON UPDATE CASCADE
+	ON UPDATE CASCADE,
 )
 
 GO
@@ -54,7 +54,7 @@ GO
 
 CREATE TABLE Peca (
 	id				INT				NOT NULL	IDENTITY(3411, 7)	UNIQUE,
-	nome			VARCHAR(30)		NOT NULL,
+	nome			VARCHAR(30)		NOT NULL	UNIQUE,
 	preco			DECIMAL(4,2)	NOT NULL	CHECK(preco >= 0),
 	estoque			INT				NOT NULL	CHECK(estoque >= 10)
 
@@ -88,13 +88,13 @@ CREATE TABLE Funcionario(
 	id						INT				NOT NULL	IDENTITY(101, 1),
 	nome					VARCHAR(100)	NOT NULL,
 	logradouro				VARCHAR(200)	NOT NULL,
-	numero					INT				NOT NULL,
-	telefone				CHAR(11)		NOT NULL,
+	numero					INT				NOT NULL	CHECK(numero >= 0),
+	telefone				CHAR(11)		NOT NULL	CHECK(telefone = 10 OR telefone = 11),
 	categoria_Habilitacao	VARCHAR(2)		NOT NULL	CHECK(UPPER(categoria_Habilitacao) = 'A' OR 
-														UPPER(categoria_Habilitacao) = 'B' OR 
-														UPPER(categoria_Habilitacao) = 'C' OR 
-														UPPER(categoria_Habilitacao) = 'D' OR 
-														UPPER(categoria_Habilitacao) = 'E'),
+															  UPPER(categoria_Habilitacao) = 'B' OR 
+															  UPPER(categoria_Habilitacao) = 'C' OR 
+															  UPPER(categoria_Habilitacao) = 'D' OR 
+															  UPPER(categoria_Habilitacao) = 'E'),
 	categoriaId				INT				NOT NULL
 
 
