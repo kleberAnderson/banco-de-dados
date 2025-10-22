@@ -143,4 +143,4 @@ ORDER BY Ano_Fabricacao DESC
 SELECT Placa, Marca, Modelo, Cor
 FROM Veiculo
 WHERE ClienteID = 3401
-ORDER BY placa ASC
+ORDER BY placa DESC
